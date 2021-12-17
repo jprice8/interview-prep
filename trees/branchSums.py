@@ -1,5 +1,3 @@
-# Binary Tree problem 1 on algoexpert
-
 class BinaryTree:
     def __init__(self, value):
         self.value = value 
