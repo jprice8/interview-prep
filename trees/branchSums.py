@@ -42,5 +42,6 @@ def calculateBranchSums(node, runningSum, sums):
     calculateBranchSums(node.right, newRunningSum, sums)
 
 
-tree = BinaryTree(1).insert([2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(branchSums(tree))
+if __name__ == '__main__':
+    tree = BinaryTree(1).insert([2, 3, 4, 5, 6, 7, 8, 9, 10])
+    print(branchSums(tree))
