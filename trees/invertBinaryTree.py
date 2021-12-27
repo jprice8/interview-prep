@@ -1,5 +1,3 @@
-
-
 def invertBinaryTree(tree):
     if tree is None:
         return 
