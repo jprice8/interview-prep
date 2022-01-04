@@ -1,5 +1,3 @@
-
-
 def isWinner(codeList, shoppingCart):
     # Sliding window
     codeIndex = 0
@@ -11,7 +9,6 @@ def isWinner(codeList, shoppingCart):
         # If sublist is not in big list
         
         codeIndex += 1
-
     
     
 def checkForSublist(subList, bigList):

@@ -1,5 +1,3 @@
-
-
 def minConstructChange(coins):
     sum = 0
 
