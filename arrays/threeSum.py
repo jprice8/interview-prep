@@ -1,5 +1,3 @@
-
-
 # n^2 time | O(n) where n is the number of elements in array
 def threeSum(array, target):
     result = []
