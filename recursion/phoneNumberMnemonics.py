@@ -1,31 +1,34 @@
+KEYMAP = {
+    '0': ['0'],
+    '1': ['1'],
+    '2': ['a', 'b', 'c'],
+    '3': ['d', 'e', 'f'],
+    '4': ['g', 'h', 'i'],
+    '5': ['j', 'k', 'l'],
+    '6': ['m', 'n', 'o'],
+    '7': ['p', 'q', 'r', 's'],
+    '8': ['t', 'u', 'v'],
+    '9': ['w', 'x', 'y', 'z']
+}
+
 def phoneNumberM(phoneNumber):
-    keyMap = {
-        '0': '0',
-        '1': '1',
-        '2': 'abc',
-        '3': 'def',
-        '4': 'ghi',
-        '5': 'jkl',
-        '6': 'mno',
-        '7': 'pqrs',
-        '8': 'tuv',
-        '9': 'wxyz'
-    }
-
-    # Loop through all digits in the given phone number.
-    for i in range(len(phoneNumber)):
-        resultString = ''
-        currentDigit = phoneNumber[i] 
-        if currentDigit == '0' or currentDigit == '1':
-            # Handle 0 and 1
-            resultString += keyMap[currentDigit]
-        else:
-            # Loop through all results in keymap and 
-            print('hello')
+    mnemonicsFound = []
+    currentMnemonic = [0 for _ in phoneNumber]
+    recursiveHelper(0, phoneNumber, mnemonicsFound, currentMnemonic)
+    return mnemonicsFound
 
 
-def recursiveHelper(phoneNumber):
-    print('hello')
+def recursiveHelper(idx, phoneNumber, mnemonicsFound, currentMnemonic):
+    if idx == len(phoneNumber):
+        mnemonic = ''.join(currentMnemonic)
+        mnemonicsFound.append(mnemonic)
+    else:
+        digit = phoneNumber[idx]
+        letters = KEYMAP[digit]
+
+        for letter in letters:
+            currentMnemonic[idx] = letter
+            recursiveHelper(idx + 1, phoneNumber, mnemonicsFound, currentMnemonic)
 
 
 if __name__ == '__main__':
