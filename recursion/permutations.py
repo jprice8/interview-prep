@@ -1,15 +1,18 @@
+# Worst case: O(n^2*n!) time | O(n*n!) space
+# Roughly: O(n*n!) time | O(n*n!) space
 def permutations(array):
-    permuations = []
-    result = permuationHelper(array, [], permuations)
+    permutations = []
+    permuationHelper(array, [], permutations)
+    return permutations
 
-def permuationHelper(array, currentPermuation, permuations):
-    if not len(array) and len(currentPermuation):
-        permuations.append(currentPermuation)
+def permuationHelper(array, currentPermutation, permutations):
+    if not len(array) and len(currentPermutation):
+        permutations.append(currentPermutation)
     else:
         for i in range(len(array)):
             newArray = array[:i] + array[i + 1 :]
-            newPermutation = currentPermuation + [array[i]]
-            permuationHelper(newArray, newPermutation, permuations)
+            newPermutation = currentPermutation + [array[i]]
+            permuationHelper(newArray, newPermutation, permutations)
 
 
 if __name__ == '__main__':
