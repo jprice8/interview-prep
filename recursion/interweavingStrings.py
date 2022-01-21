@@ -33,6 +33,8 @@ def areInterwoven(one, two, three, i, j):
     if i < len(one) and one[i] == three[k]:
         if areInterwoven(one, two, three, i + 1, j):
             return True 
+        # return areInterwoven(one, two, three, i + 1, j)
+        # Why is he using the extra if statement?
 
     if j < len(two) and two[j] == three[k]:
         return areInterwoven(one, two, three, i, j + 1)
@@ -41,7 +43,7 @@ def areInterwoven(one, two, three, i, j):
 
 
 if __name__ == '__main__':
-    one = 'algoexpert'
-    two = 'your-dream-job'
-    three = 'your-algodream-expertjob'
+    one = 'abc'
+    two = '123'
+    three = 'a1b2c3'
     print(interweavingStrings(one, two, three))
