@@ -1,3 +1,4 @@
+# O(1) time | O(1) space - the grid will always be 9*9
 def solveSudoku(board):
     solvePartialSudoku(0, 0, board)
     return board 
