@@ -106,6 +106,67 @@ def removeIslandsAE(matrix):
     return matrix
 
 
+def removeIslandsRecursive(matrix):
+    visited = [[False for _ in row] for row in matrix] 
+    for row in range(len(matrix)):
+        for col in range(len(matrix[0])):
+            rowIsBorder = row == 0 or row == len(matrix) - 1 
+            colIsBorder = col == 0 or col == len(matrix[0]) - 1 
+            isBorder = rowIsBorder or colIsBorder
+            if not isBorder:
+                continue 
+
+            if matrix[row][col] != 1:
+                continue 
+
+            explore(row, col, matrix, visited)
+
+    # remove islands
+    for row in range(len(visited)):
+        for col in range(len(visited[0])):
+            currentLocation = visited[row][col]
+            if currentLocation != True:
+                matrix[row][col] = 0
+
+    return matrix
+
+def explore(row, col, matrix, visited):
+    stack = [[row, col]]
+
+    while len(stack) > 0:
+        currentPosition = stack.pop()
+        currentRow, currentCol = currentPosition
+
+        alreadyVisited = visited[currentRow][currentCol]
+        if alreadyVisited:
+            continue 
+
+        visited[currentRow][currentCol] = True 
+
+        neighbors = getNeighbors(currentRow, currentCol, matrix)
+
+        for neighbor in neighbors:
+            nRow, nCol = neighbor
+
+            if matrix[nRow][nCol] != 1:
+                continue 
+
+            stack.append(neighbor)
+
+
+def getNeighbors(row, col, matrix):
+    neighbors = []
+    if row - 1 >= 0:
+        neighbors.append([row - 1, col])
+    if row + 1 < len(matrix):
+        neighbors.append([row + 1, col])
+    if col - 1 >= 0:
+        neighbors.append([row, col - 1])
+    if col + 1 < len(matrix[0]):
+        neighbors.append([row, col + 1])
+    return neighbors
+    
+
 if __name__ == '__main__':
     matrix = [
         [1, 0, 0, 0, 0, 0],
@@ -115,4 +176,11 @@ if __name__ == '__main__':
         [1, 0, 1, 1, 0, 0],
         [1, 0, 0, 0, 0, 1],
     ]
-    print(removeIslands(matrix))
+
+    # matrix = [
+        # [1, 0, 0, 0],
+        # [1, 0, 1, 0],
+        # [1, 0, 0, 0],
+        # [1, 1, 1, 0],
+    # ]
+    print(removeIslandsRecursive(matrix))
