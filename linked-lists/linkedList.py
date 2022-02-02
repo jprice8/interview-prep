@@ -8,7 +8,7 @@ class LinkedList:
         self.value = value
         self.next = None
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         result = []
         curr = self
         while curr is not None:
