@@ -54,7 +54,19 @@ def aeSolution(linkedListOne, linkedListTwo):
     nodeOne = linkedListOne
     nodeTwo = linkedListTwo
     while nodeOne is not None or nodeTwo is not None or carry != 0:
-        continue
+        valueOne = nodeOne.value if nodeOne is not None else 0
+        valueTwo = nodeTwo.value if nodeTwo is not None else 0
+        sumOfValues = valueOne + valueTwo + carry
+
+        newValue = sumOfValues % 10
+        newNode = LinkedList(newValue)
+        currentNode.next = newNode 
+
+        carry = sumOfValues // 10
+        nodeOne = nodeOne.next if nodeOne is not None else None 
+        nodeTwo = nodeTwo.next if nodeTwo is not None else None 
+
+    return newLinkedListHeadPointer.next
 
 
 if __name__ == '__main__':
