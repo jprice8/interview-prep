@@ -16,10 +16,32 @@ def subarraySumDivisibleByK(nums, k):
 
     return count 
 
+from collections import defaultdict
+
+
+def solution2(nums, k):
+    hashMap = defaultdict(int)
+    hashMap[0] = 1
+    prefix = 0
+    result = 0
+
+    for num in nums:
+        prefix = (prefix + num) % k
+
+        if prefix in hashMap:
+            result += hashMap[prefix]
+
+        hashMap[prefix] += 1
+
+    return result
+
 
 if __name__ == '__main__':
-    nums = [3, 1, 2, 5, 1]
-    k = 3
-    print(subarraySumDivisibleByK(nums, k))
+    # nums = [3, 1, 2, 5, 1]
+    # k = 3
+
+    nums = [4, 5, 0, -2, -3, 1]
+    k = 5
+    print(solution2(nums, k)) # 7
 
 
