@@ -21,6 +21,8 @@ def fiveStarSeller(classes, extraStudents):
 
 
 if __name__ == '__main__':
-    classes = [[1, 2], [3, 9], [4, 5], [2, 10]]
-    extraStudents = 4
+    # classes = [[1, 2], [3, 9], [4, 5], [2, 10]]
+    # extraStudents = 4
+    classes = [[1, 2], [3, 5], [2, 2]]
+    extraStudents = 2
     print(fiveStarSeller(classes, extraStudents))
