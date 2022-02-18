@@ -67,28 +67,6 @@ def findKthLargestRecursive(nums, k):
     return select(0, len(nums) - 1, len(nums) - k)
 
 
-#### My Recursive Solution
-# O(n) time average
-# O(n^2) worst case
-# O(1) if tail recursion, O(k) space if no tail recursion for the call stack.
-class Solution:
-    def findKthLargestRec(self, nums, k):
-        k = len(nums) - k 
-
-        def quickSelect(l, r):
-            pivot, p = nums[r], l 
-            for i in range(l, r):
-                if nums[i] <= pivot:
-                    nums[p], nums[i] = nums[i], nums[p]
-                    p += 1
-            nums[p], nums[r] = nums[r], nums[p]
-
-            if p > k:   return quickSelect(l, p - 1)
-            elif p < k: return quickSelect(p + 1, r)
-            else:       return nums[p]
-
-        return quickSelect(0, len(nums) - 1)
-
 #### My Iterative Solution
 # O(n) time
 # O(1) space
@@ -126,11 +104,36 @@ def findKthLargestIterative(nums, k):
     return select(0, len(nums) - 1, k - 1)
 
 
+#### My Recursive Solution
+# O(n) time average
+# O(n^2) worst case
+# O(1) if tail recursion, O(n) space if no tail recursion for the call stack.
+class Solution:
+    def findKthLargestRec(self, nums, k):
+        k = len(nums) - k 
+
+        def quickSelect(l, r):
+            p, pivot = l, r
+            for i in range(l, r):
+                if nums[i] <= nums[pivot]:
+                    nums[p], nums[i] = nums[i], nums[p]
+                    p += 1
+            nums[p], nums[pivot] = nums[pivot], nums[p]
+
+            if p > k:   return quickSelect(l, p - 1)
+            elif p < k: return quickSelect(p + 1, r)
+            else:       return nums[p]
+
+        return quickSelect(0, len(nums) - 1)
 
 
 if __name__ == '__main__':
-    nums = [3, 2, 1, 5, 6, 4]
-    k = 2 
+    # nums = [3, 2, 1, 5, 6, 4]
+    # nums = [8, 5, 2, 9, 5, 6, 3]
+    # k = 2 
+
+    nums = [3, 2, 3, 1, 2, 4, 5, 5, 6]
+    k = 9
     # print(find_kth_largest(k, nums))
     # print(findKthLargestIterative(nums, k))
     solution = Solution()
