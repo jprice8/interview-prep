@@ -96,6 +96,73 @@ class LRUCache:
         pass
 
 
+class ListNode:
+    def __init__(self, nodeValue=None):
+        self.next = None 
+        self.prev = None 
+        self.nodeValue = nodeValue 
+
+class LRU:
+    def __init__(self, capacity):
+        self.map = {}
+        self.size = 0
+        self.capacity = capacity
+        self.head = ListNode()
+        self.tail = ListNode()
+
+        self.head.next = self.tail 
+        self.tail.prev = self.head
+
+    def _insert_node(self, node: ListNode) -> None:
+        """
+        Always add the new node right after head.
+        """
+        node.prev = self.head 
+        node.next = self.head.next 
+
+        self.head.next.prev = node 
+        self.head.next = node 
+
+    def _remove_node(self, node: ListNode) -> None:
+        """
+        Remove an existing node from the linked list.
+        """
+        prev = node.prev 
+        nxt = node.next 
+
+        prev.next = nxt 
+        nxt.prev = prev
+
+    def _remove_and_insert(self, node: ListNode) -> None:
+        self._remove_node(node)
+        self._insert_node(node)
+
+    def removeNode(self, nodeValue: int) -> None:
+        pass
+
+    def get(self, key: int) -> int:
+        node = self.map.get(key, None)
+        if node is None:
+            return -1
+
+        self._remove_and_insert(node)
+        return node.nodeValue
+
+    def put(self, key: int, value: int) -> int:
+        node = self.map.get(key, None)
+
+        if node is None:
+            newNode = ListNode(value)
+
+            self.map[key] = newNode
+
+            self.size += 1
+
+            if self.size > self.capacity:
+                self._remove_node()
+
+
+
 if __name__ == '__main__':
     cache = LRUCache(2)
 
