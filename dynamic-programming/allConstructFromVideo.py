@@ -5,8 +5,6 @@ def allConstruct(target, wordBank):
         if target.find(word) == 0:
             prefix = target[len(word):]
             constructResult = allConstruct(prefix, wordBank)
-            if constructResult is not None:
-                constructResult.append(word)
 
     return None
 
