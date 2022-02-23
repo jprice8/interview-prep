@@ -127,6 +127,49 @@ class Solution:
         return quickSelect(0, len(nums) - 1)
 
 
+# O(n) time | O(1) space (if tail recursion)
+class Leetcode:
+    def findKthLargest(self, nums, k):
+        def partition(left, right, pivot_index):
+            pivot = nums[pivot_index]
+            # 1. move pivot to end
+            nums[pivot_index], nums[right] = nums[right], nums[pivot_index]
+
+            # 2. Move all smaller elements to left
+            store_index = left 
+            for i in range(left, right):
+                if nums[i] < pivot:
+                    nums[store_index], nums[i] = nums[i], nums[store_index]
+                    store_index += 1
+
+            # 3. Move pivot to its final place
+            nums[right], nums[store_index] = nums[store_index], nums[right]
+
+            return store_index
+
+        def select(left, right, k):
+            if left == right:
+                return nums[left]
+            
+            # Select a random pivot position in a sorted list
+            pivot_index = random.randint(left, right)
+
+            # find the pivot position in a sorted list
+            pivot_index = partition(left, right, pivot_index)
+
+            # The pivot is in its final sorted position
+            if k == pivot_index:
+                return nums[k]
+            # go left
+            elif k < pivot_index:
+                return select(left, pivot_index - 1, k)
+            else:
+            # go right
+                return select(pivot_index + 1, right, k)
+
+        return select(0, len(nums) - 1, len(nums) - k)
+            
+
 if __name__ == '__main__':
     # nums = [3, 2, 1, 5, 6, 4]
     # nums = [8, 5, 2, 9, 5, 6, 3]
@@ -136,5 +179,7 @@ if __name__ == '__main__':
     k = 9
     # print(find_kth_largest(k, nums))
     # print(findKthLargestIterative(nums, k))
-    solution = Solution()
-    print(solution.findKthLargestRec(nums, k))
+    # solution = Solution()
+    # print(solution.findKthLargestRec(nums, k))
+    lc = Leetcode()
+    print(lc.findKthLargest(nums, k))
