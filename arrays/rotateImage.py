@@ -28,6 +28,25 @@ class Solution:
             for j in range(n // 2):
                 matrix[i][j], matrix[i][-j - 1] = matrix[i][-j - 1], matrix[i][j]
 
+class Solution2:
+    def rotate(self, matrix):
+        self.transpose(matrix)
+        self.reflect(matrix)
+
+    def transpose(self, matrix):
+        for i in range(len(matrix)):
+            for j in range(i, len(matrix[i])):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+    def reflect(self, matrix):
+        for i in range(len(matrix)):
+            left = 0
+            right = len(matrix[i]) - 1
+            while left < right:
+                matrix[i][left], matrix[i][right] = matrix[i][right], matrix[i][left]
+                left += 1
+                right -= 1
+
 
 if __name__ == '__main__':
     matrix = [
@@ -38,5 +57,5 @@ if __name__ == '__main__':
         [21, 22, 23, 24, 25],
     ]
     # print(rotateImage1(matrix)) # [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
-    solution = Solution()
+    solution = Solution2()
     print(solution.rotate(matrix))
