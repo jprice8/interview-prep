@@ -92,6 +92,12 @@ def epiSolution(beginWord, endWord, wordList):
     return 0
 
 
+class Solution:
+    def wordLadder(self, beginWord, endWord, wordList):
+        q = collections.deque()
+        
+
+
 if __name__ == '__main__':
     # beginWord = 'hit'
     # endWord = 'cog'
@@ -105,6 +111,9 @@ if __name__ == '__main__':
         'c'
     ]
     # print(wordLadder(beginWord, endWord, wordList))
-    leetcode = Leetcode()
+    # leetcode = Leetcode()
     # print(leetcode.laddLength(beginWord, endWord, wordList))
-    print(epiSolution(beginWord, endWord, wordList))
+    # print(epiSolution(beginWord, endWord, wordList))
+
+    s = Solution()
+    print(s.wordLadder(beginWord, endWord))
