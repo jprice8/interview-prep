@@ -1,25 +1,4 @@
 class Solution:
-    def mergeIntervals(self, intervals):
-        result = []
-        intervals = sorted(intervals, key=lambda x: x[0])
-
-        i = 0
-        while i < len(intervals):
-            maxRight = intervals[i][1]
-            newInterval = []
-            j = i + 1
-            while j < len(intervals) and intervals[i][1] >= intervals[j][0]:
-                maxRight = max(maxRight, intervals[j][1])
-                newInterval = [intervals[i][0], maxRight]
-                j += 1
-
-            # Apply logic with j - 1
-            result.append(newInterval)
-            i = j - 1
-            i += 1
-
-        return result
-
     def optimalSolution(self, intervals):
         intervals.sort(key=lambda x: x[0])
         output = [intervals[0]]
