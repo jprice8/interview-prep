@@ -11,6 +11,19 @@ def reverseLinkedList(head):
     return previousNode
 
 
+class Solution:
+    def reverseLinkedList(self, head):
+        prev = None 
+        node = head 
+
+        while node is not None:
+            nextNode = node.next 
+            node.next = prev 
+            prev = node 
+            node = nextNode 
+
+        return prev
+
 
 if __name__ == '__main__':
     node0 = LinkedList(0)
@@ -26,5 +39,7 @@ if __name__ == '__main__':
     node3.next = node4
     node4.next = node5
 
-    print(reverseLinkedList(node0)) # 5 -> 4 -> 3 -> 2 -> 1
-    print(node0.printNodes())
+    # print(reverseLinkedList(node0)) # 5 -> 4 -> 3 -> 2 -> 1
+
+    s = Solution()
+    print(s.reverseLinkedList(node0))
