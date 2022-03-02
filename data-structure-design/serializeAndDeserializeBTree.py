@@ -46,6 +46,39 @@ class Codec:
         return dfs()
 
 
+class Solution2:
+    def serialize(self, root):
+        result = []
+        def dfs(node):
+            if node is None:
+                result.append('N')
+                return 
+
+            result.append(str(node.val))
+            dfs(node.left)
+            dfs(node.right)
+
+        dfs(root)
+        return ''.join(result)
+
+
+    def deserialize(self, data):
+        nodeList = data.split(',')
+        self.i = 0
+        def dfs():
+            if nodeList[self.i] == 'N':
+                self.i += 1
+                return None 
+
+            node = TreeNode(nodeList[self.i])
+            self.i += 1
+            node.left = dfs()
+            node.right = dfs()
+            return node
+        return dfs()
+
+
+
 if __name__ == '__main__':
     node1 = TreeNode(1)
     node2 = TreeNode(2)
@@ -60,4 +93,8 @@ if __name__ == '__main__':
 
     ser = Codec()
     deser = Codec()
+    # print(deser.deserialize(ser.serialize(node1)))
+
+    ser = Solution2()
+    deser = Solution2()
     print(deser.deserialize(ser.serialize(node1)))
