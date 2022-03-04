@@ -60,13 +60,8 @@ class Neetcode:
 
         return res
 
+
 if __name__ == '__main__':
     string = 'babad'
-    mySolution = MySolution()
-    # print(mySolution.longestPalindrome(string)) # bab or aba
-
-    string2 = 'cbbd'
-    neetCode = Neetcode()
-    # print(neetCode.longestPalindrome(string2))
-    bottomUp = BottomUp()
-    print(bottomUp.longestPalindrome(string2))
+    n = Neetcode()
+    print(n.longestPalindrome(string))
