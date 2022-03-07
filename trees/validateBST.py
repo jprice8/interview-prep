@@ -1,67 +1,32 @@
 from nodeDepths import BinaryTreeNode
 
+class Solution:
+    def validateBst(self, root):
+        def dfs(node, minNumber, maxNumber):
+            if node is None:
+                return True
 
-def validateBst(root):
-    isValid = True 
-    traverseBst(root, isValid)
-    return isValid
+            if node.value <= minNumber or node.value >= maxNumber:
+                return False
+            leftIsValid = dfs(node.left, minNumber, node.value)
+            return leftIsValid and dfs(node.right, node.value, maxNumber)
 
-
-def traverseBst(node, isValid):
-    if node is None:
-        return 
-
-    traverseBst(node.left, isValid)
-    if not confirmNodeIsBst(node):
-        isValid = False
-    traverseBst(node.right, isValid)
-
-
-def confirmNodeIsBst(node):
-    # If valid BST return True
-    if node.left and node.value < node.left.value:
-        return False
-    if node.right and node.value > node.right.value:
-        return False 
-
-    return True
+        return dfs(root, float('-inf'), float('inf'))
+        
 
 if __name__ == '__main__':
-    # node1 = BinaryTreeNode(1)
-    # node10 = BinaryTreeNode(10)
-    # nodeA5 = BinaryTreeNode(5)
-    # node15 = BinaryTreeNode(15)
-    # node2 = BinaryTreeNode(2)
-    # nodeB5 = BinaryTreeNode(5)
-    # node13 = BinaryTreeNode(13)
-    # node22 = BinaryTreeNode(22)
-    # node14 = BinaryTreeNode(14)
-
-    # node10.left = nodeA5
-    # node10.right = node15
-
-    # nodeA5.left = node2 
-    # nodeA5.right = nodeB5
-
-    # node2.left = node1
-
-    # node15.left = node13 
-    # node15.right = node22 
-    
-    # node13.right = node14
-
-    # print(validateBst(node10))
-
-    node10 = BinaryTreeNode(10)
     node5 = BinaryTreeNode(5)
-    node15 = BinaryTreeNode(15)
-    node10b = BinaryTreeNode(10)
+    node4 = BinaryTreeNode(4)
+    node6 = BinaryTreeNode(6)
+    node3 = BinaryTreeNode(3)
+    node7 = BinaryTreeNode(7)
 
-    node10.left = node5 
-    node10.right = node15
-    
-    node5.right = node10b
+    node5.left = node4 
+    node5.right = node6 
 
-    print(validateBst(node10))
+    node6.left = node3 
+    node6.right = node7
 
+    s = Solution()
+    print(s.validateBst(node5))
 
