@@ -21,18 +21,24 @@ class Solution:
             # partition is correct
             if Aleft <= Bright and Bleft <= Aright:
                 # odd
-                if total % 2:
+                if total % 2 != 0:
                     return min(Aright, Bright)
                 # even
                 return (max(Aleft, Bleft) + min(Aright, Bright)) / 2
             elif Aleft > Bright:
                 r = i - 1
             else:
+                # Bleft is gt Aright
                 l = i + 1
 
 
 if __name__ == '__main__':
-    nums1 = []
-    nums2 = []
+    # example 1
+    # nums1 = [1, 2, 3, 4, 5, 6, 7, 8]
+    # nums2 = [1, 2, 3, 4, 5]
+
+    # example 2
+    nums1 = [1, 2, 8, 9, 15]
+    nums2 = [7, 11, 18, 19, 21, 25]
     s = Solution()
     print(s.medianOfTwoSorted(nums1, nums2))
