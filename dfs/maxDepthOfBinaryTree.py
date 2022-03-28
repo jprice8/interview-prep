@@ -40,4 +40,4 @@ if __name__ == '__main__':
     root.left.right = TreeNode(8)
 
     s = Solution()
-    print(s.maxDepthIter(root))
+    print(s.maxDepthWithState(root))
