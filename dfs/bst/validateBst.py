@@ -2,20 +2,20 @@ from TreeNode import TreeNode
 
 
 class Solution:
-    def validate(self):
-        pass
+    def validate(self, root):
+        def dfs(node, min_value, max_value):
+            if node is None:
+                return True 
 
-    def find(self, val):
-        pass 
+            # visit
+            if not (min_value <= node.val <= max_value):
+                return False
 
-    def insert(self, root, val):
-        if root is None:
-            return TreeNode(val)
-        if val < root.val:
-            root.left = self.insert(root.left, val)
-        elif val > root.val:
-            root.right = self.insert(root.right, val)
-        return root
+            # recursive calls
+            return dfs(node.left, min_value, node.val) and dfs(node.right, node.val, max_value)
+
+        return dfs(root, float('-inf'), float('inf'))
+
 
 if __name__ == '__main__':
     root = TreeNode(7)
@@ -27,4 +27,4 @@ if __name__ == '__main__':
     root.right.right = TreeNode(13)
 
     s = Solution()
-    print(s.validate(root, 1))
+    print(s.validate(root))
