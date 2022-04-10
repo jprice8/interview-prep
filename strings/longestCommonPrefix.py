@@ -1,6 +1,18 @@
 from typing import List
 
 
+class Node:
+    def __init__(self):
+        self.root = {}
+        self.end = "#"
+
+    def insert(self, word: str) -> None:
+        node = self.root 
+        for c in word:
+            node = node.setdefault(c, {})
+        node[self.end] = self.end
+
+
 class Solution:
     def horizontalScan(self, strs: List[str]) -> str:
         shortest = min(strs, key=len)
