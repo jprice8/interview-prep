@@ -1,7 +1,6 @@
 class Solution:
     def evaluate(self, string: str) -> int:
         # '3+1'
-        operatorSet = set(['+', '-', '*', '/'])
         opStack = [] # [+, *] 
         numStack = [] # ['10, 2, 6]
         # build stacks
