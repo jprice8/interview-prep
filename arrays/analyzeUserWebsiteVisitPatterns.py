@@ -43,9 +43,36 @@ class Solution:
 
         return max(sorted(patterns), key = patterns.get)
 
+    def explainOptimal(self, username, timestamp, website):
+        def combinations(lst):
+            res = set()
+            for i in range(len(lst) - 2):
+                for j in range(i + 1, len(lst) - 1):
+                    for k in range(j + 1, len(lst)):
+                        res.add((lst[i], lst[j], lst[k]))
+
+            return res
+
+        # step 1: sort the entire stream and hash into dict
+        # O(nlogn)
+        user_site_history = collections.defaultdict(list) # {user: [site1, site2, site3]}
+        for user, time, site in sorted(zip(username, timestamp, website), key=lambda x: (x[0], x[1])):
+            user_site_history[user].append(site)
+
+        # step 2: combinations
+        # O(n^3)
+        seq_freq = collections.Counter()
+        for user, sites in user_site_history.items():
+            combination_set = combinations(sites)
+            seq_freq.update(combination_set)
+
+        # step 3: return highest occuring pattern
+        return max(sorted(seq_freq), key=seq_freq.get) 
+
+
 if __name__ == '__main__':
     username = ['joe', 'joe', 'joe', 'james', 'james', 'james', 'mary', 'mary', 'mary']
     timestamp = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     website = ['home', 'about', 'career', 'home', 'cart', 'maps', 'home', 'home', 'about', 'career']
     s = Solution()
-    print(s.analyzeUserWebsiteVisitPatterns(username, timestamp, website))
+    print(s.explainOptimal(username, timestamp, website))
