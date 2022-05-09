@@ -21,7 +21,31 @@ def threeSum(array, target):
     return result
 
 
+class Solution:
+    def threeSum(self, nums):
+        res = []
+        nums.sort()
 
-array = [12, 3, 1, 2, -6, 5, -8, 6]
-target = 0
-print(threeSum(array, target))
+        for idx, num in enumerate(nums):
+            if idx > 0 and num == nums[idx - 1]:
+                continue
+
+            l, r = idx + 1, len(nums) - 1
+            while l < r:
+                currSum = num + nums[l] + nums[r]
+                if currSum < 0:
+                    l += 1
+                elif currSum > 0:
+                    r -= 1
+                else:
+                    res.append([num, nums[l], nums[r]])
+                    l += 1
+                    while nums[l] == nums[l - 1] and l < r:
+                        l += 1
+                    
+        return res
+
+if __name__ == '__main__':
+    s = Solution()
+    print(s.threeSum([-2, -2, 0, 0, 2, 2])) # [-2, 0, 2]
+
