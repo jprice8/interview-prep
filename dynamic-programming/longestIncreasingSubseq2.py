@@ -1,17 +1,22 @@
+from bisect import bisect_left
+
+
 class Solution:
     def longestSub(self, arr):
-        def dfs(startIdx, path):
-            nonlocal longestSub
-            if startIdx == len(arr):
-                return
+        sub = []
+        for num in arr:
+            i = bisect_left(sub, num)
 
-            for i in range(startIdx, len(arr)):
-                path.append(arr[i])
-                dfs(i + 1, path)
+            # if num is greater than any element in sub
+            if i == len(sub):
+                sub.append(num)
 
-        longestSub = 0
-        dfs(0)
-        return longestSub
+            # otherwise, replace the first element in sub greater than or equal to num
+            else:
+                sub[i] = num 
+
+        return len(sub)
+
 
 if __name__ == '__main__':
     s = Solution()
